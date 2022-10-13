@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>bikin gelap terang sesi 6</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a onclick="reRender()" id="home">HOME</a>
+            <a onclick="darkmode()" id="mode">MODE</a>
+            <a id="sukasuka"> MODE WARNAIN SENDIRI
+                <input id="colorpicker" type="color" onchange="backgroundColor()" class="ganti-warna" />
+            </a>
+        </nav>
+        <h1>mode gelap terang sesi 6</h1>
+        <p id="info"></p>
+    </div>
+
+    <script>
+        let body = document.body;
+        let info = document.getElementById("info");
+        let mode = document.getElementById("mode");
+        let home = document.getElementById("home");
+        let sukasuka = document.getElementById("sukasuka");
+
+        const darkLimit = 5;
+        let darkCounter = 0;
+        let darkRemaining;
+        function darkmode() {
+            if (darkRemaining == 0){
+                info.textContent = "jatah dark mode sudah habis";
+                mode.style.display = "none";
+                sukasuka.style.display="none"
+                home.textContent = "RESTART";
+                return;
+            }
+
+            if (darkRemaining % 2 == 0) {
+                mode.textContent = "MODE-LIGHT";
+            } else {
+                mode.textContent = "MODE-DARK";
+                
+            }
+
+            darkCounter += 1;
+            darkRemaining = darkLimit - darkCounter;
+            info.textContent = `anda meng klik sebanyak ${darkCounter}x, tersisa sebanyak ${darkRemaining}x `;
+            
+            body.classList.toggle("dark");
+        }
+
+        function reRender(){
+            location.reload();
+        }
+        function backgroundColor() {
+            let color = document.getElementById('colorpicker').value;
+            document.body.style.backgroundColor = color;
+            body.style.color = "white";
+            if (color == "#ffffff") {
+                body.style.color = "black";
+            }
+        }
+    </script>
+</body>
+</html>
